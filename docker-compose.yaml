@@ -4,20 +4,19 @@ services:
     build: ./frontend
     ports:
       - '80:80'
+    networks:
+      - comiclib-network
     depends_on:
       - backend
 
   backend:
     build: ./backend
     ports:
-      - '8080:8080'
+      - '8090:8090'
+    networks:
+      - comiclib-network
     depends_on:
       - database
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -h localhost -p 5432"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   database:
     image: postgres:latest
@@ -27,6 +26,8 @@ services:
       POSTGRES_PASSWORD: secret_password
     ports:
       - '5432:5432'
+    networks:
+      - comiclib-network
 
 networks:
   comiclib-network:
