@@ -1,1 +1,29 @@
+version: '1'
 services:
+  frontend:
+    build: ./frontend
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    ports:
+      - '8080:8080'
+    depends_on:
+      - database
+
+  database:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: comic_library
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+    ports:
+      - '5432:5432'
+
+networks:
+  comiclib-network:
+    driver: bridge
+
