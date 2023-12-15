@@ -15,3 +15,4 @@ public class ComiclibApplication {
 	}
 
 }
+// ToDo: Add the database or figure out how to initialize it

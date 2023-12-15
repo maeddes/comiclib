@@ -9,15 +9,6 @@ services:
     depends_on:
       - backend
 
-  backend:
-    build: ./backend
-    ports:
-      - '8090:8090'
-    networks:
-      - comiclib-network
-    depends_on:
-      - database
-
   database:
     image: postgres:latest
     environment:
@@ -28,6 +19,15 @@ services:
       - '5432:5432'
     networks:
       - comiclib-network
+
+  backend:
+    build: ./backend
+    ports:
+      - '8090:8080'
+    networks:
+      - comiclib-network
+    depends_on:
+      - database
 
 networks:
   comiclib-network:
