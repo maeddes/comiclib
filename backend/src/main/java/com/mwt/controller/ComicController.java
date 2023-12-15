@@ -1,4 +1,4 @@
-package com.mwt.comiclib;
+package com.mwt.controller;
 
 import com.mwt.model.ComicEntity;
 import com.mwt.repository.ComicRepository;
