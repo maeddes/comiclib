@@ -12,7 +12,7 @@ services:
   database:
     image: postgres:latest
     environment:
-      POSTGRES_DB: comic_database
+      POSTGRES_DB: comic_library
       POSTGRES_USER: comiclib_user
       POSTGRES_PASSWORD: secret_password
     ports:
@@ -28,6 +28,11 @@ services:
       - comiclib-network
     depends_on:
       - database
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/comic_library
+      - SPRING_DATASOURCE_USERNAME=comiclib_user
+      - SPRING_DATASOURCE_PASSWORD=secret_password
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
 networks:
   comiclib-network:
