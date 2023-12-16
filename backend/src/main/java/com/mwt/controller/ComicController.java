@@ -1,4 +1,4 @@
-package com.mwt.comiclib;
+package com.mwt.controller;
 
 import com.mwt.model.ComicEntity;
 import com.mwt.repository.ComicRepository;
@@ -40,6 +40,6 @@ public class ComicController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteComic(@PathVariable Long id) {
-        comicRepository.deleteById(id);
+        comicRepository.findById(id).ifPresent(existingComic -> comicRepository.deleteById(id));
     }
 }
