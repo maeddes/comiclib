@@ -40,6 +40,6 @@ public class ComicController {
 
     @DeleteMapping("/delete/{id}")
     public void deleteComic(@PathVariable Long id) {
-        comicRepository.deleteById(id);
+        comicRepository.findById(id).ifPresent(existingComic -> comicRepository.deleteById(id));
     }
 }

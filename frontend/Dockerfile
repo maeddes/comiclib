@@ -6,7 +6,7 @@ ENTRYPOINT ["top", "-b"]
 # frontend/Dockerfile
 
 # Use an official Node runtime as a parent image
-FROM node:latest
+FROM node:alpine3.18
 
 # Set the working directory to /app
 WORKDIR /app

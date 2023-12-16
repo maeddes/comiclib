@@ -41,20 +41,14 @@ function addComic() {
             }
             return response.json();
         })
-        .then(newComic => {
-            // Update the table with the new comic
-            const comicTable = document.getElementById('comicTable');
-            const row = `<tr>
-                            <td>${newComic.id}</td>
-                            <td>${newComic.title}</td>
-                            <td><button onclick="editComic(${newComic.id})">Edit</button></td>
-                            <td><button onclick="deleteComic(${newComic.id})">Delete</button></td>
-                         </tr>`;
-            comicTable.innerHTML += row;
+        .then(() => {
+            // Call fetchComics to reload the table
+            fetchComics();
         })
         .catch(error => {
             console.error('Error adding comic:', error);
             alert('Error adding comic. Please try again.');
+            fetchComics();
         });
 }
 
@@ -74,25 +68,14 @@ function editComic(id) {
             }
             return response.json();
         })
-        .then(updatedComic => {
-            // Update the table with the edited comic
-            const comicTable = document.getElementById('comicTable');
-            const rows = comicTable.getElementsByTagName('tr');
-
-            for (let i = 1; i < rows.length; i++) {
-                const columns = rows[i].getElementsByTagName('td');
-                const comicId = parseInt(columns[0].innerText, 10);
-
-                if (comicId === updatedComic.id) {
-                    // Update the corresponding row with the edited details
-                    columns[1].innerText = updatedComic.title;
-                    break;
-                }
-            }
+        .then(() => {
+            // Call fetchComics to reload the table
+            fetchComics();
         })
         .catch(error => {
             console.error('Error updating comic:', error);
             alert('Error updating comic. Please try again.');
+            fetchComics();
         });
 }
 
@@ -108,23 +91,12 @@ function deleteComic(id) {
             return response.json();
         })
         .then(() => {
-            // Remove the corresponding row from the table
-            const comicTable = document.getElementById('comicTable');
-            const rows = comicTable.getElementsByTagName('tr');
-
-            for (let i = 1; i < rows.length; i++) {
-                const columns = rows[i].getElementsByTagName('td');
-                const comicId = parseInt(columns[0].innerText, 10);
-
-                if (comicId === id) {
-                    // Remove the corresponding row
-                    rows[i].remove();
-                    break;
-                }
-            }
+            // Call fetchComics to reload the table
+            fetchComics();
         })
         .catch(error => {
             console.error('Error deleting comic:', error);
             alert('Error deleting comic. Please try again.');
+            fetchComics();
         });
 }
