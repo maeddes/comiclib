@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Fetch comics from the backend
 function fetchComics() {
-    fetch('http://localhost:8080/comics/all')
+    fetch('http://localhost:8090/comics/all')
         .then(response => response.json())
         .then(data => {
             const comicTable = document.getElementById('comicTable');
@@ -28,7 +28,7 @@ function fetchComics() {
 function addComic() {
     const title = prompt('Enter comic title:');
 
-    fetch('http://localhost:8080/comics/create', {
+    fetch('http://localhost:8090/comics/create', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function addComic() {
 // Edit a comic
 function editComic(id) {
     const updatedTitle = prompt('Enter updated title:');
-    fetch(`http://localhost:8080/comics/update/${id}`, {
+    fetch(`http://localhost:8090/comics/update/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ function editComic(id) {
 
 // Delete a comic
 function deleteComic(id) {
-    fetch(`http://localhost:8080/comics/delete/${id}`, {
+    fetch(`http://localhost:8090/comics/delete/${id}`, {
         method: 'DELETE',
     })
         .then(response => {
