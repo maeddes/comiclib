@@ -1,0 +1,13 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend",
+  "main": "public/frontend.js",
+  "scripts": {
+    "start:client": "http-server ./public -p 3000",
+    "start:server": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

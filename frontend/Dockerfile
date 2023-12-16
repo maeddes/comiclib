@@ -5,18 +5,23 @@ ENTRYPOINT ["top", "-b"]
 
 # frontend/Dockerfile
 
-# Use an official Nginx runtime as a parent image
-FROM nginx:alpine
+# Use an official Node runtime as a parent image
+FROM node:latest
 
 # Set the working directory to /app
 WORKDIR /app
 
 # Copy the current directory contents into the container at /app
-COPY frontend.js /app
-COPY index.html /app
+COPY package*.json ./
 
-# Make port 80 available to the world outside this container
-EXPOSE 81
+# Install any needed packages specified
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Make port 3000 available to the world outside this container
+EXPOSE 3000
 
 # Run app.py when the container launches
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["npm", "run", "start"]

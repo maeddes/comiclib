@@ -1,6 +1,6 @@
 // frontend/frontend.js
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     fetchComics();
 });
 
