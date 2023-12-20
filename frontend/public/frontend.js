@@ -88,7 +88,6 @@ function deleteComic(id) {
             if (!response.ok) {
                 throw new Error('Failed to delete comic.');
             }
-            return response.json();
         })
         .then(() => {
             // Call fetchComics to reload the table
