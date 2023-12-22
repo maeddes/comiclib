@@ -7,8 +7,9 @@ services:
     networks:
       - comiclib-network
     depends_on:
-      - backend
-
+      backend:
+        condition: service_healthy
+        restart: true
   database:
     image: postgres:latest
     environment:
@@ -28,6 +29,13 @@ services:
       - comiclib-network
     depends_on:
       - database
+    healthcheck: 
+      test: "nc -v -z localhost 8080" # healthcheck is executed IN the container and NOT on the container daemon!
+      interval: 2s
+      timeout: 10s
+      retries: 10
+      start_period: 4s
+      start_interval: 5s
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/comic_library
       - SPRING_DATASOURCE_USERNAME=comiclib_user
